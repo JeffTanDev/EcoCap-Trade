@@ -10,9 +10,10 @@ function fetchCompanyInfo() {
         return;
     }
 
-    axios.get(`https://api.example.com/company?name=${companyName}`)
+    axios.get(`http://localhost:8080/company?name=${companyName}`)
         .then(response => {
-            const companyData = response.data;
+            const companyData = response.data.data;
+            console.log(companyData);
             displayCompanyInfo(companyData);
         })
         .catch(error => {
