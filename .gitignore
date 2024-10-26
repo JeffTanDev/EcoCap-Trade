@@ -45,3 +45,4 @@ Thumbs.db
 # Ignore generated files
 /build/
 /out/
+application.properties
