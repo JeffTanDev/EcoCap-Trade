@@ -27,7 +27,7 @@ function displayCompanyInfo(data) {
     resultDiv.innerHTML = `
         <h2>${data.cName}</h2>
         <p>Location: ${data.cLocation}</p>
-        <p>Industry: ${data.cType}</p>
-        <p>Description: ${data.emissionQuota}</p>
+        <p>Company Type: ${data.cType}</p>
+        <p>Emission Quota Per Year: ${data.emissionQuota}</p>
     `;
 }
