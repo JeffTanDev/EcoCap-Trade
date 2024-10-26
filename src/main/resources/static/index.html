@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Information Lookup</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<header>
+    <button class="login-btn" onclick="redirectToLogin()">Login</button>
+</header>
+<main>
+    <div class="container">
+        <h1>Company Information Lookup</h1>
+        <div class="search-box">
+            <input type="text" id="companyName" placeholder="Enter company name...">
+            <button onclick="fetchCompanyInfo()">Search</button>
+        </div>
+        <div id="result" class="result-box"></div>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
