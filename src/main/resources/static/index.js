@@ -10,7 +10,7 @@ function fetchCompanyInfo() {
         return;
     }
 
-    axios.get(`http://localhost:8080/company?name=${companyName}`)
+    axios.get(`/company?name=${companyName}`)
         .then(response => {
             const companyData = response.data.data;
             console.log(companyData);
