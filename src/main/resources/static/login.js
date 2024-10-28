@@ -8,8 +8,13 @@ function login() {
     })
         .then(response => {
             // 假设后端返回 200 表示登录成功
-            if (response.status === 200) {
-                window.location.href = '/'; // 登录成功后跳转到首页
+            console.log(response);
+            if (response.data.status === 200) {
+                document.getElementById('error-message').innerText = '';
+                window.location.href = '/market.html'; // 登录成功后跳转到市场
+            }
+            if (response.data.status === 404){
+                document.getElementById('error-message').innerText = 'Invalid username or password.';
             }
         })
         .catch(error => {
