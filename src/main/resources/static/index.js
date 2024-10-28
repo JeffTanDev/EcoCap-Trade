@@ -12,9 +12,15 @@ function fetchCompanyInfo() {
 
     axios.get(`/company?name=${companyName}`)
         .then(response => {
+            console.log(response);
             const companyData = response.data.data;
             console.log(companyData);
-            displayCompanyInfo(companyData);
+            if (response.data.status === 200) {
+                displayCompanyInfo(companyData);
+            }
+            else if (response.data.status === 404) {
+                document.getElementById('result').innerText = 'Company not found or API error.';
+            }
         })
         .catch(error => {
             console.error('Error fetching company info:', error);
