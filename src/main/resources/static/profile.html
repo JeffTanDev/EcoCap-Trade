@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Information</title>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+<header class="header">
+  <button class="logout-button" onclick="logout()">Logout</button>
+</header>
+<main class="container">
+  <h1>Company Information</h1>
+  <div class="company-info">
+    <p><strong>User ID:</strong> <span id="userID">12345</span></p>
+    <p><strong>User Name:</strong> <span id="userName">John Doe</span></p>
+    <p><strong>Direct Emission Quota:</strong> <span id="directQuota">1000</span>
+      <button onclick="buyQuota('DEQ')">Buy</button>
+      <button onclick="sellQuota('DEQ')">Sell</button>
+    </p>
+    <p><strong>Indirect EE Quota:</strong> <span id="indirectEEQuota">800</span>
+      <button onclick="buyQuota('Indirect_EE')">Buy</button>
+      <button onclick="sellQuota('Indirect_EE')">Sell</button>
+    </p>
+    <p><strong>Indirect Emission Quota:</strong> <span id="indirectQuota">1200</span>
+      <button onclick="buyQuota('Indirect')">Buy</button>
+      <button onclick="sellQuota('Indirect')">Sell</button>
+    </p>
+    <p><strong>Company Name:</strong> <span id="companyName">Tech Corp</span></p>
+    <p><strong>Location:</strong> <span id="companyLocation">San Jose</span></p>
+    <p><strong>Registration:</strong> <span id="companyRegistration">123-456-789</span></p>
+    <p><strong>Type:</strong> <span id="companyType">Technology</span></p>
+    <p><strong>Contact Person:</strong> <span id="linkMan">Jane Smith</span></p>
+    <p><strong>Email:</strong> <span id="email">contact@techcorp.com</span></p>
+  </div>
+</main>
+<script src="profile.js"></script>
+</body>
+</html>
