@@ -11,7 +11,7 @@ function login() {
             console.log(response);
             if (response.data.status === 200) {
                 document.getElementById('error-message').innerText = '';
-                window.location.href = '/market.html'; // 登录成功后跳转到市场
+                window.location.href = '/profile.html'; // 登录成功后跳转到市场
             }
             if (response.data.status === 404){
                 document.getElementById('error-message').innerText = 'Invalid username or password.';
