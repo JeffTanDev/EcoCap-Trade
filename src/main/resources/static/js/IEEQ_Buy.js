@@ -1,8 +1,8 @@
 // Sample product data
 const products = [
-    { id: 1, title: "Indirect Emission Type A", todayQuota: 500, remaining: 300, description: "Description of Type A" },
-    { id: 2, title: "Indirect Emission Type B", todayQuota: 400, remaining: 250, description: "Description of Type B" },
-    { id: 3, title: "Indirect Emission Type C", todayQuota: 600, remaining: 400, description: "Description of Type C" },
+    { id: 1, title: "Indirect Energy Emission Type A", todayQuota: 500, remaining: 300, description: "Description of Type A" },
+    { id: 2, title: "Indirect Energy Emission Type B", todayQuota: 400, remaining: 250, description: "Description of Type B" },
+    { id: 3, title: "Indirect Energy Emission Type C", todayQuota: 600, remaining: 400, description: "Description of Type C" },
 ];
 
 // Initialize product list
@@ -67,6 +67,6 @@ function purchaseQuota() {
 }
 
 function returnToProfile() {
-    window.location.href = 'profile.html'; // Change 'profile.html' to your actual profile page URL
+    window.location.href = '/profile'; // Change 'profile.html' to your actual profile page URL
 }
 

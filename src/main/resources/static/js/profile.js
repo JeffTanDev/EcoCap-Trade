@@ -1,13 +1,13 @@
 function logout() {
-    window.location.href = 'index.html'; // Redirect to index page
+    window.location.href = '/'; // Redirect to index page
 }
 
 function buyQuota(type) {
-    window.location.href = `${type.toLowerCase()}_Buy.html`;
+    window.location.href = `/${type.toUpperCase()}_Buy`;
 }
 
 function sellQuota(type) {
-    window.location.href = `${type.toLowerCase()}_Sell.html`;
+    window.location.href = `/${type.toUpperCase()}_Sell`;
 }
 
 // Sample data population (In real applications, this data would be fetched from a backend)

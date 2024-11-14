@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buy Indirect Emission Quota</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="IQ_Sell.css">
+    <link rel="stylesheet" href="/css/IQ_Buy.css">
 </head>
 <body>
 <!-- Header with return button -->
@@ -14,7 +14,7 @@
 </header>
 
 <div class="container mt-5">
-    <h1 class="text-center">Indirect Emission Sell Quota</h1>
+    <h1 class="text-center">Indirect Emission Quota</h1>
     <div class="row" id="productList">
         <!-- Products will be injected here by JavaScript -->
     </div>
@@ -40,7 +40,7 @@
                 <input type="range" class="form-control-range slider" id="quantitySlider" min="0" max="100" value="0" oninput="updateQuantityDisplay()">
                 <p>Selected Quantity: <span id="selectedQuantity">0</span></p>
 
-                <button class="btn btn-primary apple-button" onclick="sellQuota()">Sell Now</button>
+                <button class="btn btn-primary apple-button" onclick="purchaseQuota()">Buy Now</button>
             </div>
         </div>
     </div>
@@ -50,6 +50,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="IQ_Sell.js"></script>
+<script src="/js/IQ_Buy.js"></script>
 </body>
 </html>

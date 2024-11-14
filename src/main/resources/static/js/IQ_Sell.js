@@ -67,6 +67,6 @@ function sellQuota() {
 }
 
 function returnToProfile() {
-    window.location.href = 'profile.html'; // Change 'profile.html' to your actual profile page URL
+    window.location.href = '/profile'; // Change 'profile.html' to your actual profile page URL
 }
 
