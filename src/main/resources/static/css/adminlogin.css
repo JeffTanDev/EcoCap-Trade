@@ -55,23 +55,16 @@ h1 {
     outline: none;
 }
 
-.login-btn {
+.login-box button {
+    padding: 10px;
     background-color: #0071e3;
-    color: white;
-    padding: 10px 20px;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    margin: 4px;
-    transition: background-color 0.3s ease;
-}
-
-.login-btn:hover {
-    background-color: #005bb5;
 }
 
 .error-message {
     color: red;
     font-size: 14px;
-}
+} 

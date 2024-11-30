@@ -2,6 +2,10 @@ function redirectToLogin() {
     window.location.href = '/login';
 }
 
+function redirectToAdminLogin() {
+    window.location.href = '/adminLogin';
+}
+
 function fetchCompanyInfo() {
     const companyName = document.getElementById('companyName').value;
 
@@ -41,4 +45,29 @@ function displayCompanyInfo(data) {
         <p>Indirect Energy Emission Quota: ${data.indirectEEQuota} (Used: ${data.usedIEE})</p>
         <p>Indirect Emission Quota: ${data.indirectEQuota} (Used: ${data.usedIE})</p>
     `;
+}
+
+function openAdminLoginModal() {
+    document.getElementById('adminLoginModal').style.display = 'block';
+}
+
+function closeAdminLoginModal() {
+    document.getElementById('adminLoginModal').style.display = 'none';
+}
+
+function adminLogin() {
+    const username = document.getElementById('adminUsername').value;
+    const password = document.getElementById('adminPassword').value;
+    
+    // Implement your admin login logic here
+    // Example: Send a request to the server to validate admin credentials
+    axios.post('/admin-login', { username, password })
+        .then(response => {
+            // Handle successful login
+            closeAdminLoginModal();
+        })
+        .catch(error => {
+            // Display error message
+            document.getElementById('admin-error-message').innerText = 'Invalid credentials';
+        });
 }

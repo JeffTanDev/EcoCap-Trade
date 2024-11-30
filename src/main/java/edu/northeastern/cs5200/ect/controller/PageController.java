@@ -49,4 +49,9 @@ public class PageController {
     public String IQ_Sell() {
         return "IQ_Sell";
     }
+
+    @GetMapping("/adminLogin")
+    public String adminLogin() {
+        return "adminLogin";
+    }
 }
