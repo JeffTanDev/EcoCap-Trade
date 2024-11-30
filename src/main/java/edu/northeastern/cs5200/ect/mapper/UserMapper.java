@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM company_user WHERE UserName=#{name}")
+    @Select("SELECT * FROM Company_User WHERE c_name=#{name}")
     CompanyUser get(String name);
 }

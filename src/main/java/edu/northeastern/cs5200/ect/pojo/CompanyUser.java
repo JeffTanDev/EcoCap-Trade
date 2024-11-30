@@ -1,20 +1,19 @@
 package edu.northeastern.cs5200.ect.pojo;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 public class CompanyUser {
     private Integer userId;
     private String userName;
     private String password;
-    private Double directEQuota;
-    private Double indirectEeQuota;
-    private Double indirectEQuota;
-    private Double usedDe;
-    private Double usedIee;
-    private Double usedIe;
+    private BigDecimal directEQuota;
+    private BigDecimal indirectEEQuota;
+    private BigDecimal indirectEQuota;
+    private BigDecimal usedDE;
+    private BigDecimal usedIEE;
+    private BigDecimal usedIE;
     private String cName;
     private String cLocation;
     private String cRegistration;
