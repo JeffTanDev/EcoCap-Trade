@@ -2,7 +2,6 @@ package edu.northeastern.cs5200.ect.pojo;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @Getter
 @Setter

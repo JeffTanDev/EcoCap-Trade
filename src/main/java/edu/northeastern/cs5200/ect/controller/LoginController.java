@@ -7,22 +7,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 public class LoginController {
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+    
     @Autowired
     private LoginService loginService;
 
     @PostMapping("/api/login")
     public Result<?> Auth(@RequestBody LoginRequest loginRequest) {
-        String username = loginRequest.getUsername();
-        String password = loginRequest.getPassword();
-        Boolean login= loginService.auth(username,password);
-        if(login){
-            return Result.success("success");
-        }
-        else{
-            return Result.error(404, "Password or Username is wrong");
+        try {
+            if (loginRequest == null || loginRequest.getUsername() == null || loginRequest.getPassword() == null) {
+                return Result.error(400, "Username and password are required");
+            }
+            
+            String username = loginRequest.getUsername();
+            String password = loginRequest.getPassword();
+            
+            logger.info("Attempting login for user: {}", username);
+            
+            Boolean login = loginService.auth(username, password);
+            
+            if (login) {
+                return Result.success("Login successful");
+            } else {
+                return Result.error(401, "Invalid username or password");
+            }
+        } catch (Exception e) {
+            logger.error("Login error: ", e);
+            return Result.error(500, "Internal server error: " + e.getMessage());
         }
     }
 }

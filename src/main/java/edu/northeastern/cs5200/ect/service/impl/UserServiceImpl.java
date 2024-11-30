@@ -1,7 +1,7 @@
 package edu.northeastern.cs5200.ect.service.impl;
 
 import edu.northeastern.cs5200.ect.mapper.UserMapper;
-import edu.northeastern.cs5200.ect.pojo.User;
+import edu.northeastern.cs5200.ect.pojo.CompanyUser;
 import edu.northeastern.cs5200.ect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +12,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User get(String name) {
-        System.out.println(userMapper.get(name));
+    public CompanyUser get(String name) {
         return userMapper.get(name);
     }
 }

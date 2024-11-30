@@ -13,12 +13,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Boolean auth(String username, String password) {
-        CompanyUser newCompany=loginMapping.auth(username,password);
-        System.out.println(newCompany);
-        if (newCompany!=null){
-            return true;
-        }else {
-            return false;
-        }
+        CompanyUser user = loginMapping.auth(username, password);
+        return user != null;
     }
 }
