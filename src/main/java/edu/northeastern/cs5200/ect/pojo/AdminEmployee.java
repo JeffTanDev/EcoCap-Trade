@@ -11,4 +11,5 @@ public class AdminEmployee {
     private String aRbac;
     private Integer departmentIdDuo;
     private Integer employeeIdDuo;
+    private String password;
 } 

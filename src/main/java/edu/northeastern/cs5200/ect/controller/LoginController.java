@@ -1,5 +1,6 @@
 package edu.northeastern.cs5200.ect.controller;
 
+import edu.northeastern.cs5200.ect.pojo.CompanyUser;
 import edu.northeastern.cs5200.ect.pojo.LoginRequest;
 import edu.northeastern.cs5200.ect.pojo.Result;
 import edu.northeastern.cs5200.ect.service.LoginService;
@@ -29,10 +30,10 @@ public class LoginController {
             
             logger.info("Attempting login for user: {}", username);
             
-            Boolean login = loginService.auth(username, password);
+            CompanyUser user = loginService.auth(username, password);
             
-            if (login) {
-                return Result.success("Login successful");
+            if (user != null) {
+                return Result.success(user);  
             } else {
                 return Result.error(401, "Invalid username or password");
             }
