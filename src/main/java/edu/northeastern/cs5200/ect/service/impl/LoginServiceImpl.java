@@ -12,7 +12,8 @@ public class LoginServiceImpl implements LoginService {
     private LoginMapping loginMapping;
 
     @Override
-    public CompanyUser auth(String username, String password) {
-        return loginMapping.auth(username, password);
+    public Boolean auth(String username, String password) {
+        CompanyUser user = loginMapping.auth(username, password);
+        return user != null;
     }
 }
