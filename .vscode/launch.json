@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EctApplication<ECT>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "edu.northeastern.cs5200.ect.EctApplication",
+            "projectName": "ECT",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
