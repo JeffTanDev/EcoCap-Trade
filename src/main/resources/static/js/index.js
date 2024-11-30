@@ -37,8 +37,8 @@ function displayCompanyInfo(data) {
         <p>Registration: ${data.cregistration}</p>
         <p>Contact Person: ${data.linkMan}</p>
         <p>Email: ${data.email}</p>
-        <p>Direct Emission Quota: ${data.directEQuota} (Used: ${data.usedDe})</p>
-        <p>Indirect Energy Emission Quota: ${data.indirectEeQuota} (Used: ${data.usedIee})</p>
-        <p>Indirect Emission Quota: ${data.indirectEQuota} (Used: ${data.usedIe})</p>
+        <p>Direct Emission Quota: ${data.directEQuota} (Used: ${data.usedDE})</p>
+        <p>Indirect Energy Emission Quota: ${data.indirectEEQuota} (Used: ${data.usedIEE})</p>
+        <p>Indirect Emission Quota: ${data.indirectEQuota} (Used: ${data.usedIE})</p>
     `;
 }
