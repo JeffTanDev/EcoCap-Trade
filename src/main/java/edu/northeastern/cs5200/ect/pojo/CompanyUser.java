@@ -12,10 +12,13 @@ public class CompanyUser {
     private Double directEQuota;
     private Double indirectEeQuota;
     private Double indirectEQuota;
-    private String companyName;
-    private String companyLocation;
-    private String companyRegistration;
-    private String companyType;
+    private Double usedDe;
+    private Double usedIee;
+    private Double usedIe;
+    private String cName;
+    private String cLocation;
+    private String cRegistration;
+    private String cType;
     private String linkMan;
     private String email;
 }

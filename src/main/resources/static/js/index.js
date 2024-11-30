@@ -31,9 +31,14 @@ function fetchCompanyInfo() {
 function displayCompanyInfo(data) {
     const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = `
-        <h2>${data.cName}</h2>
-        <p>Location: ${data.cLocation}</p>
-        <p>Company Type: ${data.cType}</p>
-        <p>Emission Quota Per Year: ${data.emissionQuota}</p>
+        <h2>${data.cname}</h2>
+        <p>Location: ${data.clocation}</p>
+        <p>Company Type: ${data.ctype}</p>
+        <p>Registration: ${data.cregistration}</p>
+        <p>Contact Person: ${data.linkMan}</p>
+        <p>Email: ${data.email}</p>
+        <p>Direct Emission Quota: ${data.directEQuota} (Used: ${data.usedDe})</p>
+        <p>Indirect Energy Emission Quota: ${data.indirectEeQuota} (Used: ${data.usedIee})</p>
+        <p>Indirect Emission Quota: ${data.indirectEQuota} (Used: ${data.usedIe})</p>
     `;
 }
