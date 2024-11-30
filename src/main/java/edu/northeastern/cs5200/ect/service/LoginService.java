@@ -1,5 +1,7 @@
 package edu.northeastern.cs5200.ect.service;
 
+import edu.northeastern.cs5200.ect.pojo.CompanyUser;
+
 public interface LoginService {
-    Boolean auth(String username, String password);
+    CompanyUser auth(String username, String password);
 }
