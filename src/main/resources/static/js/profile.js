@@ -1,24 +1,65 @@
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Fetching profile data...');
+    
+    fetch('/api/profile', {
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        return response.json();
+    })
+    .then(response => {
+        console.log('Received data:', response);
+        
+        if (response.status === 200 && response.data) {
+            const user = response.data;
+            console.log('User data:', user);
+            
+            document.getElementById('userID').textContent = user.userId || 'N/A';
+            document.getElementById('userName').textContent = user.userName || 'N/A';
+            document.getElementById('directQuota').textContent = user.directEQuota || 'N/A';
+            document.getElementById('indirectEEQuota').textContent = user.indirectEEQuota || 'N/A';
+            document.getElementById('indirectQuota').textContent = user.indirectEQuota || 'N/A';
+            document.getElementById('companyName').textContent = user.cname || 'N/A';
+            document.getElementById('companyLocation').textContent = user.clocation || 'N/A';
+            document.getElementById('companyRegistration').textContent = user.cregistration || 'N/A';
+            document.getElementById('companyType').textContent = user.ctype || 'N/A';
+            document.getElementById('linkMan').textContent = user.linkMan || 'N/A';
+            document.getElementById('email').textContent = user.email || 'N/A';
+        } else {
+            console.error('Error in response:', response);
+            alert('Failed to load profile: ' + (response.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+        alert('Failed to load profile: ' + error.message);
+    });
+});
+
 function logout() {
-    window.location.href = '/'; // Redirect to index page
+    fetch('/api/logout', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 200) {
+                window.location.href = '/login'; // Redirect to login page
+            } else {
+                alert('Logout failed: ' + data.msg);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Logout failed');
+        });
 }
 
 function buyQuota(type) {
-    window.location.href = `/${type.toUpperCase()}_Buy`;
+    alert('Buying quota: ' + type);
+    // Implement buy quota logic here
 }
 
 function sellQuota(type) {
-    window.location.href = `/${type.toUpperCase()}_Sell`;
+    alert('Selling quota: ' + type);
+    // Implement sell quota logic here
 }
-
-// Sample data population (In real applications, this data would be fetched from a backend)
-document.getElementById("userID").textContent = "00123";
-document.getElementById("userName").textContent = "John Doe";
-document.getElementById("directQuota").textContent = "1000 (Used: 300, Remaining: 700)";
-document.getElementById("indirectEEQuota").textContent = "800 (Used: 200, Remaining: 600)";
-document.getElementById("indirectQuota").textContent = "1200 (Used: 500, Remaining: 700)";
-document.getElementById("companyName").textContent = "Tech Innovations Ltd.";
-document.getElementById("companyLocation").textContent = "New York";
-document.getElementById("companyRegistration").textContent = "123-456-789";
-document.getElementById("companyType").textContent = "Manufacturing";
-document.getElementById("linkMan").textContent = "Jane Smith";
-document.getElementById("email").textContent = "contact@techinnovations.com";

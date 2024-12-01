@@ -5,11 +5,10 @@ import edu.northeastern.cs5200.ect.pojo.LoginRequest;
 import edu.northeastern.cs5200.ect.pojo.Result;
 import edu.northeastern.cs5200.ect.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class LoginController {
@@ -19,7 +18,7 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/api/login")
-    public Result<?> Auth(@RequestBody LoginRequest loginRequest) {
+    public Result<?> Auth(@RequestBody LoginRequest loginRequest, HttpSession session) {
         try {
             if (loginRequest == null || loginRequest.getUsername() == null || loginRequest.getPassword() == null) {
                 return Result.error(400, "Username and password are required");
@@ -33,7 +32,10 @@ public class LoginController {
             CompanyUser user = loginService.auth(username, password);
             
             if (user != null) {
-                return Result.success(user);  
+                session.setAttribute("username", username);
+                System.out.println("Session username set to: " + username);
+                System.out.println("Login successful. Username in session: " + session.getAttribute("username"));
+                return Result.success(user);
             } else {
                 return Result.error(401, "Invalid username or password");
             }
@@ -41,5 +43,20 @@ public class LoginController {
             logger.error("Login error: ", e);
             return Result.error(500, "Internal server error: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/api/current-user")
+    public Result<?> getCurrentUser(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            return Result.success(username);
+        }
+        return Result.error(401, "No user logged in");
+    }
+
+    @PostMapping("/api/logout")
+    public Result<?> logout(HttpSession session) {
+        session.invalidate();
+        return Result.success("Logged out successfully");
     }
 }
