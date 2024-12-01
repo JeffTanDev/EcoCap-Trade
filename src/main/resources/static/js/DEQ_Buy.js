@@ -31,21 +31,26 @@ axios.get('/api/dailyRelease')
 
 // Function to show product details in the modal
 function showProductDetails(productId) {
-    // 假设productId是从API中获取的
     axios.get(`/api/productDetails/${productId}`)
         .then(response => {
-            const product = response.data;
-            document.getElementById("productTitle").textContent = product.ProductName;
-            document.getElementById("productDescription").textContent = product.Description;
-            document.getElementById("productTodayQuota").textContent = product.Initial_Amount;
-            document.getElementById("productRemainingQuota").textContent = product.Available_Amount;
-            document.getElementById("quantitySlider").max = product.Available_Amount;
-            document.getElementById("quantitySlider").value = 0;
-            document.getElementById("selectedQuantity").textContent = 0;
-            $("#productModal").modal("show");
+            if (response.status === 200 && response.data) {
+                const product = response.data.data;
+                console.log('Product details:', product);
+                document.getElementById("productTitle").textContent = product.productName;
+                document.getElementById("productDescription").textContent = product.description || "No description available.";
+                document.getElementById("productTodayQuota").textContent = Number(product.initialAmount) || 0;
+                document.getElementById("productRemainingQuota").textContent = Number(product.availableAmount) || 0;
+                document.getElementById("quantitySlider").max = Number(product.availableAmount) || 0;
+                document.getElementById("quantitySlider").value = 0;
+                document.getElementById("selectedQuantity").textContent = 0;
+                $("#productModal").modal("show");
+            } else {
+                console.warn('Failed to load product details');
+            }
         })
         .catch(error => {
             console.error('Error fetching product details:', error);
+            alert('Failed to load product details');
         });
 }
 

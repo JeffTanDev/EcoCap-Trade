@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -86,6 +87,46 @@ public class QuotaController {
         } catch (Exception e) {
             logger.error("Error fetching Direct Emissions product: ", e);
             return Result.error(500, "Error fetching product data");
+        }
+    }
+
+    @GetMapping("/productDetails/{productId}")
+    public Result<?> getProductDetails(@PathVariable Integer productId) {
+        try {
+            DailyRelease product = quotaService.getDirectEmissionsProduct();
+            if (product != null && product.getProductId().equals(productId)) {
+                return Result.success(product);
+            }
+            return Result.error(404, "Product not found");
+        } catch (Exception e) {
+            logger.error("Error fetching product details: ", e);
+            return Result.error(500, "Error fetching product details");
+        }
+    }
+
+    @PostMapping("/purchase")
+    public Result<?> purchaseQuota(@RequestBody Map<String, Object> request, HttpSession session) {
+        try {
+            String username = (String) session.getAttribute("username");
+            Integer userId = (Integer) session.getAttribute("userID");
+
+            if (username == null || userId == null) {
+                return Result.error(401, "Not logged in");
+            }
+
+            Double quantity = Double.valueOf(request.get("quantity").toString());
+            if (quantity == null || quantity <= 0) {
+                return Result.error(400, "Invalid quantity");
+            }
+
+            boolean success = quotaService.purchaseQuota(username, quantity, userId);
+            if (success) {
+                return Result.success("Purchase successful");
+            }
+            return Result.error(400, "Failed to purchase quota");
+        } catch (Exception e) {
+            logger.error("Error purchasing quota: ", e);
+            return Result.error(500, "Error processing purchase request");
         }
     }
 } 

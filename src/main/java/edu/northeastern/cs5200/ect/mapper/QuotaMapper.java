@@ -38,4 +38,10 @@ public interface QuotaMapper {
         @Result(property = "availableAmount", column = "Available_Amount")
     })
     DailyRelease getDirectEmissionsProduct();
+
+    @Update("UPDATE Company_User SET Direct_E_Quota = Direct_E_Quota + #{quantity} WHERE UserName = #{username}")
+    boolean updateDirectEQuota(@Param("username") String username, @Param("quantity") Double quantity);
+
+    @Update("UPDATE Daily_Release SET Available_Amount = Available_Amount - #{quantity} WHERE Product_Name = 'Direct_Emissions'")
+    boolean updateAvailableAmount(@Param("quantity") Double quantity);
 } 

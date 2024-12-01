@@ -6,4 +6,5 @@ public interface QuotaService {
     DailyRelease getDEQQuota(String username);
     boolean sellDEQ(String username, Double amount, Integer userId);
     DailyRelease getDirectEmissionsProduct();
+    boolean purchaseQuota(String username, Double quantity, Integer userId);
 } 
