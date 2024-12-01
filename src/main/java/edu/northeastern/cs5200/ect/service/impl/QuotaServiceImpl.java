@@ -31,4 +31,9 @@ public class QuotaServiceImpl implements QuotaService {
         // 插入交易记录
         return quotaMapper.insertTransaction(amount, userId, new Date());
     }
+
+    @Override
+    public DailyRelease getDirectEmissionsProduct() {
+        return quotaMapper.getDirectEmissionsProduct();
+    }
 } 

@@ -73,4 +73,19 @@ public class QuotaController {
             return Result.error(500, "Error processing sell request");
         }
     }
+
+    @GetMapping("/dailyRelease")
+    public Result<?> getDirectEmissionsProduct() {
+        try {
+            DailyRelease product = quotaService.getDirectEmissionsProduct();
+            logger.info("Product: {}", product);
+            if (product != null) {
+                return Result.success(product);
+            }
+            return Result.error(404, "No product data found");
+        } catch (Exception e) {
+            logger.error("Error fetching Direct Emissions product: ", e);
+            return Result.error(500, "Error fetching product data");
+        }
+    }
 } 

@@ -29,4 +29,13 @@ public interface QuotaMapper {
     boolean insertTransaction(@Param("amount") Double amount, 
                             @Param("userId") Integer userId, 
                             @Param("date") Date date);
+
+    @Select("SELECT * FROM Daily_Release WHERE Product_Name = 'Direct_Emissions'")
+    @Results({
+        @Result(property = "productId", column = "Product_ID"),
+        @Result(property = "productName", column = "Product_Name"),
+        @Result(property = "initialAmount", column = "Initial_Amount"),
+        @Result(property = "availableAmount", column = "Available_Amount")
+    })
+    DailyRelease getDirectEmissionsProduct();
 } 

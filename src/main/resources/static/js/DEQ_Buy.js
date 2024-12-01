@@ -1,41 +1,52 @@
-// Sample product data
-const products = [
-    { id: 1, title: "Direct Emission Type A", todayQuota: 500, remaining: 300, description: "Description of Type A" },
-    { id: 2, title: "Direct Emission Type B", todayQuota: 400, remaining: 250, description: "Description of Type B" },
-    { id: 3, title: "Direct Emission Type C", todayQuota: 600, remaining: 400, description: "Description of Type C" },
-];
-
 // Initialize product list
 const productList = document.getElementById("productList");
-products.forEach(product => {
-    const productCard = document.createElement("div");
-    productCard.classList.add("col-md-4");
-    productCard.innerHTML = `
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">${product.title}</h5>
-        <p class="card-text">Available Today: ${product.todayQuota}</p>
-        <p class="card-text">Remaining: ${product.remaining}</p>
-        <button class="btn btn-primary apple-button" onclick="showProductDetails(${product.id})">View Details</button>
-      </div>
-    </div>
-  `;
-    productList.appendChild(productCard);
-});
+
+// 使用axios从后端获取数据
+axios.get('/api/dailyRelease')
+    .then(response => {
+        console.log('API response:', response.data);
+        const product = response.data.data;
+        console.log('Product:', product);
+        if (product && product.productName === "Direct_Emissions") {
+            const productCard = document.createElement("div");
+            productCard.classList.add("col-md-4");
+            productCard.innerHTML = `
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">${product.productName}</h5>
+                <p class="card-text">Available Today: ${product.initialAmount}</p>
+                <p class="card-text">Remaining: ${product.availableAmount}</p>
+                <button class="btn btn-primary apple-button" onclick="showProductDetails(${product.productId})">View Details</button>
+              </div>
+            </div>
+          `;
+            productList.appendChild(productCard);
+        } else {
+            console.warn('No product found or product name mismatch');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching product data:', error);
+    });
 
 // Function to show product details in the modal
 function showProductDetails(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        document.getElementById("productTitle").textContent = product.title;
-        document.getElementById("productDescription").textContent = product.description;
-        document.getElementById("productTodayQuota").textContent = product.todayQuota;
-        document.getElementById("productRemainingQuota").textContent = product.remaining;
-        document.getElementById("quantitySlider").max = product.remaining;
-        document.getElementById("quantitySlider").value = 0;
-        document.getElementById("selectedQuantity").textContent = 0;
-        $("#productModal").modal("show");
-    }
+    // 假设productId是从API中获取的
+    axios.get(`/api/productDetails/${productId}`)
+        .then(response => {
+            const product = response.data;
+            document.getElementById("productTitle").textContent = product.ProductName;
+            document.getElementById("productDescription").textContent = product.Description;
+            document.getElementById("productTodayQuota").textContent = product.Initial_Amount;
+            document.getElementById("productRemainingQuota").textContent = product.Available_Amount;
+            document.getElementById("quantitySlider").max = product.Available_Amount;
+            document.getElementById("quantitySlider").value = 0;
+            document.getElementById("selectedQuantity").textContent = 0;
+            $("#productModal").modal("show");
+        })
+        .catch(error => {
+            console.error('Error fetching product details:', error);
+        });
 }
 
 // Function to update quantity display based on slider
