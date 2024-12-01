@@ -59,11 +59,11 @@ function logout() {
 }
 
 function buyQuota(type) {
-    alert('Buying quota: ' + type);
+    window.location.href = `${type}_Buy`;
     // Implement buy quota logic here
 }
 
 function sellQuota(type) {
-    alert('Selling quota: ' + type);
+    window.location.href = `${type}_Sell`;
     // Implement sell quota logic here
 }
