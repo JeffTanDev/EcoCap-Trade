@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-    <button class="logout-button" onclick="logout()">Logout</button>
+    <button class="back-button" onclick="goBack()">Back</button>
 </header>
 <main class="container">
     <h1>Transaction Details</h1>
@@ -27,5 +27,10 @@
     </table>
 </main>
 <script src="/js/transactions.js"></script>
+<script>
+function goBack() {
+    window.location.href = '/profile';    
+}
+</script>
 </body>
 </html> 
