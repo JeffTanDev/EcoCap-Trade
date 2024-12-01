@@ -14,14 +14,14 @@
 </header>
 
 <div class="container mt-5">
-    <h1 class="text-center">Indirect Emission Quota</h1>
-    <div class="row" id="productList">
+    <h1 class="text-center">Indirect Quota</h1>
+    <div class="row" id="iqProductList">
         <!-- Products will be injected here by JavaScript -->
     </div>
 </div>
 
 <!-- Product Details Modal -->
-<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+<div class="modal fade" id="iqProductModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -31,14 +31,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h3 id="productTitle"></h3>
-                <p id="productDescription"></p>
-                <p><strong>Available Today:</strong> <span id="productTodayQuota"></span></p>
-                <p><strong>Remaining:</strong> <span id="productRemainingQuota"></span></p>
+                <h3 id="iqProductTitle"></h3>
+                <p id="iqProductDescription"></p>
+                <p><strong>Available Today:</strong> <span id="iqProductTodayQuota"></span></p>
+                <p><strong>Remaining:</strong> <span id="iqProductRemainingQuota"></span></p>
 
-                <label for="quantitySlider">Select Quantity:</label>
-                <input type="range" class="form-control-range slider" id="quantitySlider" min="0" max="100" value="0" oninput="updateQuantityDisplay()">
-                <p>Selected Quantity: <span id="selectedQuantity">0</span></p>
+                <label for="iqQuantitySlider">Select Quantity:</label>
+                <input type="range" class="form-control-range slider" id="iqQuantitySlider" min="0" max="100" value="0" oninput="updateQuantityDisplay()">
+                <p>Selected Quantity: <span id="iqSelectedQuantity">0</span></p>
 
                 <button class="btn btn-primary apple-button" onclick="purchaseQuota()">Buy Now</button>
             </div>

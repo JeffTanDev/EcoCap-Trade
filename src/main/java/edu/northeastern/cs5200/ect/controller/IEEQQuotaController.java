@@ -64,4 +64,69 @@ public class IEEQQuotaController {
             return Result.error(500, "Error processing sell request");
         }
     }
+
+    @GetMapping("/iee-dailyRelease")
+    public Result<?> getIndirectEnergyEmissionsProduct() {
+        try {
+            DailyRelease product = ieeqQuotaService.getIndirectEnergyEmissionsProduct();
+            if (product != null) {
+                return Result.success(product);
+            }
+            return Result.error(404, "No product data found");
+        } catch (Exception e) {
+            logger.error("Error fetching Indirect Energy Emissions product: ", e);
+            return Result.error(500, "Error fetching product data");
+        }
+    }
+
+    @GetMapping("/iee-productDetails/{productId}")
+    public Result<?> getProductDetails(@PathVariable Integer productId) {
+        try {
+            DailyRelease product = ieeqQuotaService.getProductDetails(productId);
+            if (product != null) {
+                return Result.success(product);
+            }
+            return Result.error(404, "Product details not found");
+        } catch (Exception e) {
+            logger.error("Error fetching product details: ", e);
+            return Result.error(500, "Error fetching product details");
+        }
+    }
+
+    @PostMapping("/iee-purchase")
+    public Result<?> purchaseQuota(@RequestBody Map<String, Object> request, HttpSession session) {
+        try {
+            String username = (String) session.getAttribute("username");
+            Integer userId = (Integer) session.getAttribute("userID");
+
+            if (username == null || userId == null) {
+                return Result.error(401, "Not logged in");
+            }
+
+            String product = (String) request.get("product");
+            Double quantity = Double.valueOf(request.get("quantity").toString());
+            if (quantity == null || quantity <= 0) {
+                return Result.error(400, "Invalid quantity");
+            }
+
+            boolean success = ieeqQuotaService.purchaseQuota(username, product, quantity, userId);
+            if (success) {
+                return Result.success("Purchase successful");
+            }
+            return Result.error(400, "Failed to purchase quota");
+        } catch (Exception e) {
+            logger.error("Error purchasing quota: ", e);
+            return Result.error(500, "Error processing purchase request");
+        }
+    }
+
+    @PostMapping("/update-indirect-ee-quota")
+    public Result<?> updateIndirectEEQuota(@RequestParam String username, @RequestParam Double quantity) {
+        boolean success = ieeqQuotaService.updateIndirectEnergyEmissionsQuota(username, quantity);
+        if (success) {
+            return Result.success("Quota updated successfully");
+        } else {
+            return Result.error(400, "Failed to update quota");
+        }
+    }
 } 

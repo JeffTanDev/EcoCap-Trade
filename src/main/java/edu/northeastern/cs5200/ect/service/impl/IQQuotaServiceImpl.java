@@ -1,6 +1,7 @@
 package edu.northeastern.cs5200.ect.service.impl;
 
 import edu.northeastern.cs5200.ect.pojo.CompanyUser;
+import edu.northeastern.cs5200.ect.pojo.DailyRelease;
 import edu.northeastern.cs5200.ect.mapper.IQQuotaMapper;
 import edu.northeastern.cs5200.ect.service.IQQuotaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,36 @@ public class IQQuotaServiceImpl implements IQQuotaService {
     @Override
     @Transactional
     public boolean sellQuota(String username, Double amount, Integer userId) {
-        // 更新配额
         boolean quotaUpdated = iqQuotaMapper.updateUsedQuota(username, amount);
         if (!quotaUpdated) {
             return false;
         }
-        
-        // 插入交易记录
         return iqQuotaMapper.insertTransaction(amount, userId, new Date());
+    }
+
+    @Override
+    public DailyRelease getProductDetails(Integer productId) {
+        return iqQuotaMapper.getProductDetails(productId);
+    }
+
+    @Override
+    public DailyRelease getIndirectQuotaProduct() {
+        return iqQuotaMapper.getIndirectQuotaProduct();
+    }
+
+    @Override
+    @Transactional
+    public boolean purchaseQuota(String username, String product, Double quantity, Integer userId) {
+        boolean quotaUpdated = iqQuotaMapper.updateUsedQuota(username, quantity);
+        if (!quotaUpdated) {
+            return false;
+        }
+        return iqQuotaMapper.insertTransaction(quantity, userId, new Date());
+    }
+
+    @Override
+    @Transactional
+    public boolean updateIndirectEmissionQuota(String username, Double quantity) {
+        return iqQuotaMapper.updateIndirectEmissionQuota(username, quantity);
     }
 } 
