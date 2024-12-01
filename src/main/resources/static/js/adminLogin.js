@@ -7,6 +7,7 @@ function adminLogin() {
         password: password
     })
     .then(response => {
+        console.log(response);
         if (response.data.status === 200) {
             document.getElementById('admin-error-message').innerText = '';
             window.location.href = '/admin-dashboard'; // Redirect to admin dashboard
