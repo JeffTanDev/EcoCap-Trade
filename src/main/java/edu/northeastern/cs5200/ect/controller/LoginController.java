@@ -33,7 +33,9 @@ public class LoginController {
             
             if (user != null) {
                 session.setAttribute("username", username);
+                session.setAttribute("userID", user.getUserId());
                 System.out.println("Session username set to: " + username);
+                System.out.println("Session userID set to: " + user.getUserId());
                 System.out.println("Login successful. Username in session: " + session.getAttribute("username"));
                 return Result.success(user);
             } else {

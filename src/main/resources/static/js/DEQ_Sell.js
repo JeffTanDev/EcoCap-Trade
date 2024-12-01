@@ -1,72 +1,112 @@
-// Sample product data
-const products = [
-    { id: 1, title: "Direct Emission Type A", todayQuota: 500, remaining: 300, description: "Description of Type A" },
-    { id: 2, title: "Direct Emission Type B", todayQuota: 400, remaining: 250, description: "Description of Type B" },
-    { id: 3, title: "Direct Emission Type C", todayQuota: 600, remaining: 400, description: "Description of Type C" },
-];
+// 初始化产品列表
+document.addEventListener('DOMContentLoaded', function() {
+    fetchQuotaData();
+});
 
-// Initialize product list
-const productList = document.getElementById("productList");
-products.forEach(product => {
+function fetchQuotaData() {
+    fetch('/api/deq-quota', {
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(response => {
+        if (response.status === 200 && response.data) {
+            const quota = response.data;
+            displayQuota(quota);
+        } else {
+            console.error('Error fetching quota:', response.message);
+            alert('Failed to load quota data: ' + response.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to load quota data: ' + error.message);
+    });
+}
+
+function displayQuota(quota) {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = ''; // 清空现有内容
+
     const productCard = document.createElement("div");
     productCard.classList.add("col-md-4");
     productCard.innerHTML = `
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">${product.title}</h5>
-        <p class="card-text">Available Today: ${product.todayQuota}</p>
-        <p class="card-text">Remaining: ${product.remaining}</p>
-        <button class="btn btn-primary apple-button" onclick="showProductDetails(${product.id})">View Details</button>
-      </div>
-    </div>
-  `;
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">${'Direct Emission Quota'}</h5>
+                <p class="card-text">Total Quota: ${quota.initialAmount || 0}</p>
+                <p class="card-text">Remaining: ${quota.availableAmount || 0}</p>
+                <button class="btn btn-primary apple-button" onclick="showProductDetails(${quota.productId})">View Details</button>
+            </div>
+        </div>
+    `;
     productList.appendChild(productCard);
-});
+}
 
 // Function to show product details in the modal
 function showProductDetails(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        document.getElementById("productTitle").textContent = product.title;
-        document.getElementById("productDescription").textContent = product.description;
-        document.getElementById("productTodayQuota").textContent = product.todayQuota;
-        document.getElementById("productRemainingQuota").textContent = product.remaining;
-        document.getElementById("quantitySlider").max = product.remaining;
-        document.getElementById("quantitySlider").value = 0;
-        document.getElementById("selectedQuantity").textContent = 0;
-        $("#productModal").modal("show");
-    }
+    fetch('/api/deq-quota', {
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(response => {
+        if (response.status === 200 && response.data) {
+            const quota = response.data;
+            document.getElementById("productTitle").textContent = 'Direct Emission Quota';
+            document.getElementById("productDescription").textContent = `Company: ${quota.productName}`;
+            document.getElementById("productTodayQuota").textContent = quota.initialAmount || 0;
+            document.getElementById("productRemainingQuota").textContent = quota.availableAmount || 0;
+            document.getElementById("quantitySlider").max = quota.availableAmount || 0;
+            document.getElementById("quantitySlider").value = 0;
+            document.getElementById("selectedQuantity").textContent = 0;
+            $("#productModal").modal("show");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to load product details');
+    });
 }
 
-// Function to update quantity display based on slider
 function updateQuantityDisplay() {
-    const quantity = document.getElementById("quantitySlider").value;
-    document.getElementById("selectedQuantity").textContent = quantity;
-}
-
-// Function to handle the purchase action
-function sellQuota() {
-    const productTitle = document.getElementById("productTitle").textContent;
-    const quantity = document.getElementById("quantitySlider").value;
-
-    // Data to send to the backend
-    const data = {
-        product: productTitle,
-        quantity: quantity
-    };
-
-    // Send a POST request to the backend
-    axios.post('/api/purchase', data)
-        .then(response => {
-            alert(`Successfully purchased ${quantity} units of ${productTitle}`);
-            $("#productModal").modal("hide");
-        })
-        .catch(error => {
-            alert(`Error purchasing quota: ${error.response ? error.response.data : error.message}`);
-        });
+    const slider = document.getElementById("quantitySlider");
+    document.getElementById("selectedQuantity").textContent = slider.value;
 }
 
 function returnToProfile() {
-    window.location.href = '/profile'; // Change 'profile.html' to your actual profile page URL
+    window.location.href = '/profile';
 }
 
+function sellQuota() {
+    const amount = parseFloat(document.getElementById("quantitySlider").value);
+    if (!amount || amount <= 0) {
+        alert('Please select a valid amount to sell');
+        return;
+    }
+
+    fetch('/api/deq-sell', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ amount: amount })
+    })
+    .then(response => response.json())
+    .then(response => {
+        if (response.status === 200) {
+            alert('Successfully sold quota');
+            // 关闭模态框
+            $("#productModal").modal("hide");
+            // 刷新页面数据
+            fetchQuotaData();
+        } else {
+            alert('Failed to sell quota: ' + response.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to process sell request');
+    });
+}

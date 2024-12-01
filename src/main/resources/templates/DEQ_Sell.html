@@ -40,7 +40,10 @@
                 <input type="range" class="form-control-range slider" id="quantitySlider" min="0" max="100" value="0" oninput="updateQuantityDisplay()">
                 <p>Selected Quantity: <span id="selectedQuantity">0</span></p>
 
-                <button class="btn btn-primary apple-button" onclick="sellQuota()">Sell Now</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="sellQuota()">Sell Now</button>
+                </div>
             </div>
         </div>
     </div>
