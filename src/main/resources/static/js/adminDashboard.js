@@ -63,6 +63,9 @@ function showTicketModal(ticket) {
         ${ticket.transId ? `<p><strong>Transaction ID:</strong> ${ticket.transId}</p>` : ''}
         ${ticket.adminIdDuo ? `<p><strong>Admin ID:</strong> ${ticket.adminIdDuo}</p>` : ''}
         ${ticket.ticketClose ? `<p><strong>Close Date:</strong> ${formatDate(ticket.ticketClose)}</p>` : ''}
+        ${ticket.resolve === 'Resolved' ? `
+            <button onclick="deleteTicket(${ticket.ticketId})" class="action-btn delete-btn">Delete</button>
+        ` : ''}
     `;
     
     // 使用Bootstrap的模态框方法
@@ -208,5 +211,20 @@ window.onclick = function(event) {
     const modal = document.getElementById('ticketModal');
     if (event.target === modal) {
         closeModal();
+    }
+}
+
+async function deleteTicket(ticketId) {
+    try {
+        const response = await fetch(`/api/tickets/${ticketId}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) throw new Error('Failed to delete ticket');
+
+        fetchTickets();
+    } catch (error) {
+        console.error('Error:', error);
+        showError('Unable to delete ticket. Please try again later.');
     }
 }

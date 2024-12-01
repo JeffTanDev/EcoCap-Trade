@@ -146,6 +146,21 @@ th {
     color: white;
 }
 
+.delete-btn {
+    background-color: #dc3545; /* Red color for delete */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+.delete-btn:hover {
+    opacity: 0.9;
+}
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -188,4 +203,11 @@ th {
     .filter-buttons {
         flex-wrap: wrap;
     }
+}
+
+.modal-content {
+    /* 确保模态框有足够的空间显示内容 */
+    min-height: 200px;
+    min-width: 300px;
+    overflow: auto; /* 允许内容滚动 */
 }

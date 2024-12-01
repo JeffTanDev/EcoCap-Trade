@@ -8,5 +8,5 @@ public interface TicketService {
     List<Ticket> getTicketsByType(String ticketType);           
     Ticket getTicketById(Integer id);        
     boolean updateTicketStatus(int ticketId, String resolve, Integer adminIdDuo);
-    boolean deleteTicket(int ticketId);
+    boolean deleteTicket(Integer ticketId);
 }

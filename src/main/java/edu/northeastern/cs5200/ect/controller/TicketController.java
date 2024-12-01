@@ -2,6 +2,8 @@ package edu.northeastern.cs5200.ect.controller;
 
 import edu.northeastern.cs5200.ect.pojo.Ticket;
 import edu.northeastern.cs5200.ect.service.TicketService;
+import edu.northeastern.cs5200.ect.pojo.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +14,8 @@ import java.util.List;
 @RequestMapping("/api/tickets")
 public class TicketController {
 
-    private final TicketService ticketService;
-
-    // Constructor-based dependency injection
-    public TicketController(TicketService ticketService) {
-        this.ticketService = ticketService;
-    }
+    @Autowired
+    private TicketService ticketService;
 
     // Get all tickets
     @GetMapping("/all")
@@ -50,15 +48,18 @@ public class TicketController {
     }
 
     @DeleteMapping("/{ticketId}")
-    public ResponseEntity<Void> deleteTicket(@PathVariable int ticketId) {
-        boolean isDeleted = ticketService.deleteTicket(ticketId);
-        if (isDeleted) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public Result<?> deleteTicket(@PathVariable Integer ticketId) {
+        try {
+            boolean success = ticketService.deleteTicket(ticketId);
+            if (success) {
+                return Result.success("Ticket deleted successfully");
+            } else {
+                return Result.error(400, "Failed to delete ticket");
+            }
+        } catch (Exception e) {
+            return Result.error(500, "Error deleting ticket");
         }
     }
-
 
     @GetMapping("/type")
     public ResponseEntity<List<Ticket>> filterTicketsByType(@RequestParam String ticketType) {
