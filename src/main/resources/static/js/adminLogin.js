@@ -13,7 +13,7 @@ function adminLogin() {
     })
     .then(response => {
         console.log('Response:', response.data);
-        if (response.data.code === 200) {
+        if (response.data.status === 200) {
             console.log('Admin login successful');
             window.location.href = '/admin/dashboard'; // 重定向到管理员面板
         } else {

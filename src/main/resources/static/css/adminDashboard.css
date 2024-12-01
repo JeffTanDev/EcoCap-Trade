@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    width: 85%; 
+    max-width: 1400px; 
+    margin: 40px auto; 
+    background-color: #ffffff;
+    border-radius: 12px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 30px; 
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px; 
+    background-color: #1e1e1e;
+    color: white;
+    border-radius: 12px 12px 0 0;
+    margin: -30px -30px 30px -30px; 
+}
+
+h1 {
+    font-size: 28px; /* Slightly larger title for desktop readability */
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px; 
+    flex-wrap: nowrap; 
+    gap: 20px; 
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 15px; /* Increased button spacing */
+}
+
+.filter-btn {
+    padding: 10px 20px; /* Larger buttons for better clickability */
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 6px; /* Slightly rounded corners */
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 16px; /* Slightly larger font */
+}
+
+.filter-btn:hover {
+    background-color: #0056b3;
+}
+
+.filter-btn.active {
+    background-color: #0056b3;
+}
+
+.search-box input {
+    padding: 10px 15px; /* Comfortable padding */
+    width: 300px; /* Adjusted to fit desktop sizes */
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* Table */
+.tickets-container {
+    overflow-x: auto;
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    padding: 15px 20px; /* Spacious padding for better readability */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px; /* Increased font size */
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    font-size: 18px; /* Larger font for headers */
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 6px 12px; /* Slightly larger for visibility */
+    border-radius: 6px;
+    font-size: 14px; /* Bigger font */
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    min-width: 100px; /* Increased for uniform appearance */
+}
+
+.status-pending {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.status-approved {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-rejected {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Action Buttons */
+.action-btn {
+    padding: 8px 15px; /* Larger buttons for clarity */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px; /* Slightly larger text */
+    margin-right: 8px;
+    transition: opacity 0.2s;
+}
+
+.action-btn:hover {
+    opacity: 0.9;
+}
+
+.view-btn {
+    background-color: #007aff;
+    color: white;
+}
+
+.approve-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        width: 95%; /* Reduced width for medium-sized screens */
+        padding: 20px;
+    }
+
+    .filters {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .search-box input {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    table {
+        font-size: 14px; /* Smaller font for readability on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: 15px;
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .filter-buttons {
+        flex-wrap: wrap;
+    }
+}

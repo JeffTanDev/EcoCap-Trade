@@ -54,4 +54,9 @@ public class PageController {
     public String adminLogin() {
         return "adminLogin";
     }
+
+    @GetMapping("/admin/dashboard")
+    public String adminDashboard() {
+        return "adminDashboard";
+    }
 }

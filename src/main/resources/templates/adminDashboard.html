@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ECT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/adminDashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <div class="header-left">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <span>Welcome, Admin</span>
+            </div>
+        </header>
+
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-type="all">All Tickets</button>
+                <button class="filter-btn" data-type="info">Info Tickets</button>
+                <button class="filter-btn" data-type="transition">Transition Tickets</button>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search tickets...">
+            </div>
+        </div>
+
+        <!-- Tickets Table -->
+        <div class="tickets-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ticket ID</th>
+                        <th>Type</th>
+                        <th>Company</th>
+                        <th>Subject</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="ticketsList">
+                    <!-- Sample row -->
+                    <tr>
+                        <td>#1</td>
+                        <td>Info</td>
+                        <td>Company A</td>
+                        <td>Information Update</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td>2024-03-15</td>
+                        <td>
+                            <button class="action-btn view-btn">View</button>
+                            <button class="action-btn approve-btn">Approve</button>
+                            <button class="action-btn reject-btn">Reject</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/js/adminDashboard.js"></script>
+</body>
+</html>
