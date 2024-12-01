@@ -120,6 +120,11 @@ th {
     color: #000;
 }
 
+.status-resolved {
+    background-color: #28a745;
+    color: #000;
+}
+
 
 /* Action Buttons */
 .action-btn {
@@ -141,15 +146,6 @@ th {
     color: white;
 }
 
-.approve-btn {
-    background-color: #28a745;
-    color: white;
-}
-
-.reject-btn {
-    background-color: #dc3545;
-    color: white;
-}
 
 /* Responsive Design */
 @media (max-width: 1024px) {
