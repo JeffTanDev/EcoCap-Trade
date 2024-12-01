@@ -39,19 +39,23 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function logout() {
-    fetch('/api/logout', { method: 'POST' })
-        .then(response => response.json())
-        .then(data => {
-            if (data.code === 200) {
-                window.location.href = '/login'; // Redirect to login page
-            } else {
-                alert('Logout failed: ' + data.msg);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Logout failed');
-        });
+    fetch('/api/logout', { 
+        method: 'POST',
+        credentials: 'include'  // 确保包含cookies和session信息
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 200) {
+            window.location.href = '/login';  // 登出成功后重定向到登录页
+        } else {
+            console.error('Logout failed:', data.message);
+            alert('Logout failed: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error during logout:', error);
+        alert('Logout failed: Network error');
+    });
 }
 
 function buyQuota(type) {

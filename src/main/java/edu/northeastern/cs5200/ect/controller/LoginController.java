@@ -56,7 +56,17 @@ public class LoginController {
 
     @PostMapping("/api/logout")
     public Result<?> logout(HttpSession session) {
-        session.invalidate();
-        return Result.success("Logged out successfully");
+        try {
+            String username = (String) session.getAttribute("username");
+            logger.info("Logging out user: {}", username);
+            
+            session.removeAttribute("username");
+            session.invalidate();  // 清除整个session
+            
+            return Result.success("Logged out successfully");
+        } catch (Exception e) {
+            logger.error("Logout error: ", e);
+            return Result.error(500, "Logout failed: " + e.getMessage());
+        }
     }
 }
