@@ -120,15 +120,6 @@ th {
     color: #000;
 }
 
-.status-approved {
-    background-color: #28a745;
-    color: white;
-}
-
-.status-rejected {
-    background-color: #dc3545;
-    color: white;
-}
 
 /* Action Buttons */
 .action-btn {

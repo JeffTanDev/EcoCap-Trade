@@ -21,9 +21,12 @@
         <!-- Filters -->
         <div class="filters">
             <div class="filter-buttons">
-                <button class="filter-btn active" data-type="all">All Tickets</button>
-                <button class="filter-btn" data-type="info">Info Tickets</button>
-                <button class="filter-btn" data-type="transition">Transition Tickets</button>
+                <button class="filter-btn" data-type="All">All</button>
+                <button class="filter-btn" data-type="Issue">Issue</button>
+                <button class="filter-btn" data-type="Request">Request</button>
+                <button class="filter-btn" data-type="Complaint">Complaint</button>
+                <button class="filter-btn" data-type="Query">Query</button>
+                <button class="filter-btn" data-type="Feedback">Feedback</button>
             </div>
             <div class="search-box">
                 <input type="text" placeholder="Search tickets...">
@@ -37,32 +40,25 @@
                     <tr>
                         <th>Ticket ID</th>
                         <th>Type</th>
-                        <th>Company</th>
-                        <th>Subject</th>
+                        <th>Information</th>
+                        <th>Start Date</th>
                         <th>Status</th>
-                        <th>Date</th>
+                        <th>User ID</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="ticketsList">
-                    <!-- Sample row -->
-                    <tr>
-                        <td>#1</td>
-                        <td>Info</td>
-                        <td>Company A</td>
-                        <td>Information Update</td>
-                        <td><span class="status-badge status-pending">Pending</span></td>
-                        <td>2024-03-15</td>
-                        <td>
-                            <button class="action-btn view-btn">View</button>
-                            <button class="action-btn approve-btn">Approve</button>
-                            <button class="action-btn reject-btn">Reject</button>
-                        </td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>
     </div>
     <script src="/js/adminDashboard.js"></script>
+    <div id="ticketModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="ticketModalContent"></div>
+        </div>
+    </div>
 </body>
 </html>
