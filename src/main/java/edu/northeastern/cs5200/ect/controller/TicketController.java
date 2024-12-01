@@ -62,7 +62,9 @@ public class TicketController {
 
     @GetMapping("/type")
     public ResponseEntity<List<Ticket>> filterTicketsByType(@RequestParam String ticketType) {
+        System.out.println("call 了");
         List<Ticket> tickets = ticketService.getTicketsByType(ticketType);
+        
         if (tickets != null && !tickets.isEmpty()) {
             return new ResponseEntity<>(tickets, HttpStatus.OK);
         } else {

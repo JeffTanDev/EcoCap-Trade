@@ -70,7 +70,7 @@ function showTicketModal(ticket) {
 }
 
 function filterTicketsByType(ticketType) {
-    fetch(`/tickets/type?ticketType=${ticketType}`)
+    fetch(`/api/tickets/type?ticketType=${ticketType}`)
         .then(response => response.json())
         .then(data => {
             displayTickets(data);
