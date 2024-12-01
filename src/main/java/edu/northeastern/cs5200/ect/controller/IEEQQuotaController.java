@@ -120,13 +120,6 @@ public class IEEQQuotaController {
         }
     }
 
-    @PostMapping("/update-indirect-ee-quota")
-    public Result<?> updateIndirectEEQuota(@RequestParam String username, @RequestParam Double quantity) {
-        boolean success = ieeqQuotaService.updateIndirectEnergyEmissionsQuota(username, quantity);
-        if (success) {
-            return Result.success("Quota updated successfully");
-        } else {
-            return Result.error(400, "Failed to update quota");
-        }
-    }
+   
+    
 } 

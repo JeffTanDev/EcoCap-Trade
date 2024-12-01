@@ -12,5 +12,4 @@ public interface IEEQQuotaService {
 
     boolean purchaseQuota(String username, String product, Double quantity, Integer userId);
 
-    boolean updateIndirectEnergyEmissionsQuota(String username, Double quantity);
 } 

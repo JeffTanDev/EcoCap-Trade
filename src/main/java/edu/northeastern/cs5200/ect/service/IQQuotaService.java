@@ -12,5 +12,5 @@ public interface IQQuotaService {
     DailyRelease getIndirectQuotaProduct();
     boolean purchaseQuota(String username, String product, Double quantity, Integer userId);
 
-    boolean updateIndirectEmissionQuota(String username, Double quantity);
+    
 } 

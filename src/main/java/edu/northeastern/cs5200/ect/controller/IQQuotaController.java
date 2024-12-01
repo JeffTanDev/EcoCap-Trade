@@ -120,13 +120,5 @@ public class IQQuotaController {
         }
     }
 
-    @PostMapping("/update-indirect-emission-quota")
-    public Result<?> updateIndirectEmissionQuota(@RequestParam String username, @RequestParam Double quantity) {
-        boolean success = iqQuotaService.updateIndirectEmissionQuota(username, quantity);
-        if (success) {
-            return Result.success("Quota updated successfully");
-        } else {
-            return Result.error(400, "Failed to update quota");
-        }
-    }
+    
 } 

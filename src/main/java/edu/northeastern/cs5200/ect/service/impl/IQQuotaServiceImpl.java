@@ -43,16 +43,16 @@ public class IQQuotaServiceImpl implements IQQuotaService {
     @Override
     @Transactional
     public boolean purchaseQuota(String username, String product, Double quantity, Integer userId) {
-        boolean quotaUpdated = iqQuotaMapper.updateUsedQuota(username, quantity);
+        boolean quotaUpdated = iqQuotaMapper.updateQuotaForPurchase(username, product, quantity);
         if (!quotaUpdated) {
             return false;
         }
-        return iqQuotaMapper.insertTransaction(quantity, userId, new Date());
-    }
 
-    @Override
-    @Transactional
-    public boolean updateIndirectEmissionQuota(String username, Double quantity) {
-        return iqQuotaMapper.updateIndirectEmissionQuota(username, quantity);
+        boolean indirectQuotaUpdated = iqQuotaMapper.updateIndirectEmissionQuota(username, quantity);
+        if (!indirectQuotaUpdated) {
+            return false;
+        }
+
+        return iqQuotaMapper.insertTransaction(quantity, userId, new Date());
     }
 } 

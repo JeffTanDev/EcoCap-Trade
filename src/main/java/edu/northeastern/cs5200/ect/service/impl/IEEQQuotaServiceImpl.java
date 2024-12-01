@@ -47,12 +47,12 @@ public class IEEQQuotaServiceImpl implements IEEQQuotaService {
         if (!quotaUpdated) {
             return false;
         }
-        return ieeqQuotaMapper.insertTransaction(quantity, userId, new Date());
-    }
+        
+        boolean indirectQuotaUpdated = ieeqQuotaMapper.updateIndirectEnergyEmissionsQuota(username, quantity);
+        if (!indirectQuotaUpdated) {
+            return false;
+        }
 
-    @Override
-    @Transactional
-    public boolean updateIndirectEnergyEmissionsQuota(String username, Double quantity) {
-        return ieeqQuotaMapper.updateIndirectEnergyEmissionsQuota(username, quantity);
+        return ieeqQuotaMapper.insertTransaction(quantity, userId, new Date());
     }
 } 
