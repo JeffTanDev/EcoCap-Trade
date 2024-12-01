@@ -50,7 +50,6 @@ function displayTickets(tickets) {
 }
 
 function showTicketModal(ticket) {
-    const modal = document.getElementById('ticketModal');
     const content = document.getElementById('ticketModalContent');
     
     content.innerHTML = `
@@ -66,7 +65,8 @@ function showTicketModal(ticket) {
         ${ticket.ticketClose ? `<p><strong>Close Date:</strong> ${formatDate(ticket.ticketClose)}</p>` : ''}
     `;
     
-    modal.style.display = 'block';
+    // 使用Bootstrap的模态框方法
+    $("#ticketModal").modal("show");
 }
 
 function filterTicketsByType(ticketType) {
@@ -194,14 +194,19 @@ function showError(message) {
     alert(message);
 }
 
-// Modal close functionality
+// 修改关闭模态框的方法
+function closeModal() {
+    $("#ticketModal").modal("hide");
+}
+
+// 更新模态框关闭事件监听
 document.querySelector('.close').onclick = function() {
-    document.getElementById('ticketModal').style.display = 'none';
+    closeModal();
 }
 
 window.onclick = function(event) {
     const modal = document.getElementById('ticketModal');
     if (event.target === modal) {
-        modal.style.display = 'none';
+        closeModal();
     }
 }
