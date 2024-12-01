@@ -59,4 +59,10 @@ public class PageController {
     public String adminDashboard() {
         return "adminDashboard";
     }
+
+    @GetMapping("/profile/transactions")
+    public String transactions() {
+        return "transactions";
+    }
+    
 }

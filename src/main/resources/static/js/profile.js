@@ -67,3 +67,21 @@ function sellQuota(type) {
     window.location.href = `${type}_Sell`;
     // Implement sell quota logic here
 }
+
+function seeTransaction() {
+    axios.post('/api/user-transactions')
+        .then(response => {
+            const transactions = response.data;
+            // 将交易数据存储在sessionStorage中，以便在新的页面中使用
+            sessionStorage.setItem('transactions', JSON.stringify(transactions));
+            window.location.href = '/profile/transactions'; // Redirect to the transaction page
+        })
+        .catch(error => {
+            console.error('Error fetching transactions:', error);
+            alert('Failed to load transactions.');
+        });
+}
+
+function askForHelp() {
+    alert('Contact support at support@example.com'); // Display a help message
+}

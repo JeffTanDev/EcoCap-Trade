@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Company Information</title>
   <link rel="stylesheet" href="css/profile.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <header class="header">
@@ -27,6 +28,10 @@
       <button onclick="buyQuota('IQ')">Buy</button>
       <button onclick="sellQuota('IQ')">Sell</button>
     </p>
+    <div class="action-buttons">
+      <button class="transaction-button" onclick="seeTransaction()">See Transaction</button>
+      <button class="help-button" onclick="askForHelp()">Ask for Help</button>
+    </div>
     <p><strong>Company Name:</strong> <span id="companyName"></span></p>
     <p><strong>Location:</strong> <span id="companyLocation"></span></p>
     <p><strong>Registration:</strong> <span id="companyRegistration"></span></p>
