@@ -228,3 +228,21 @@ async function deleteTicket(ticketId) {
         showError('Unable to delete ticket. Please try again later.');
     }
 }
+
+async function adminLogout() {
+    try {
+        const response = await fetch('/api/admin-logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        
+        if (!response.ok) {
+            throw new Error('Logout failed');
+        }
+        
+        window.location.href = '/'; // 重定向到首页
+    } catch (error) {
+        console.error('Logout error:', error);
+        showError('Logout failed. Please try again.');
+    }
+}
