@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface AdminLoginMapping {
-    @Select("SELECT * FROM adminemployee WHERE A_account=#{username} AND A_PW=#{password}")
+    @Select("SELECT * FROM Adminemployee WHERE A_account=#{username} AND A_PW=#{password}")
     @Results({
         @Result(property = "adminId", column = "AdminID"),
         @Result(property = "officeHour", column = "Office_Hour"),
