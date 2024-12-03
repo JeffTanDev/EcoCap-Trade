@@ -65,6 +65,8 @@ function showTicketModal(ticket) {
         ${ticket.ticketClose ? `<p><strong>Close Date:</strong> ${formatDate(ticket.ticketClose)}</p>` : ''}
         ${ticket.resolve === 'Resolved' ? `
             <button onclick="deleteTicket(${ticket.ticketId})" class="action-btn delete-btn">Delete</button>
+        ` : ticket.resolve === 'Pending' ? `
+            <button onclick="resolveTicket(${ticket.ticketId})" class="action-btn resolve-btn">Resolve</button>
         ` : ''}
     `;
     
@@ -244,5 +246,32 @@ async function adminLogout() {
     } catch (error) {
         console.error('Logout error:', error);
         showError('Logout failed. Please try again.');
+    }
+}
+
+async function resolveTicket(ticketId) {
+    try {
+        const response = await fetch(`/api/tickets/${ticketId}/status`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                resolve: 'Resolved',
+                adminIdDuo: 1, 
+                assistDate: new Date().toISOString()
+            })
+        });
+
+        if (!response.ok) throw new Error('Failed to resolve ticket');
+
+        fetchTickets(); // Refresh the list
+
+        // 关闭模态框
+        $("#ticketModal").modal("hide");
+
+    } catch (error) {
+        console.error('Error:', error);
+        showError('Unable to resolve ticket. Please try again later.');
     }
 }

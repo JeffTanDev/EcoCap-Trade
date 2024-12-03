@@ -65,20 +65,45 @@ function purchaseQuota() {
     const productTitle = document.getElementById("productTitle").textContent;
     const quantity = document.getElementById("quantitySlider").value;
 
-    // Data to send to the backend
     const data = {
         product: productTitle,
         quantity: quantity
     };
 
-    // Send a POST request to the backend
     axios.post('/api/purchase', data)
         .then(response => {
             alert(`Successfully purchased ${quantity} units of ${productTitle}`);
             $("#productModal").modal("hide");
+            refreshProductList(); // 刷新产品列表
         })
         .catch(error => {
             alert(`Error purchasing quota: ${error.response ? error.response.data : error.message}`);
+        });
+}
+
+function refreshProductList() {
+    axios.get('/api/dailyRelease')
+        .then(response => {
+            const product = response.data.data;
+            if (product && product.productName === "Direct_Emissions") {
+                productList.innerHTML = ''; // 清空当前列表
+                const productCard = document.createElement("div");
+                productCard.classList.add("col-md-4");
+                productCard.innerHTML = `
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">${product.productName}</h5>
+                    <p class="card-text">Available Today: ${product.initialAmount}</p>
+                    <p class="card-text">Remaining: ${product.availableAmount}</p>
+                    <button class="btn btn-primary apple-button" onclick="showProductDetails(${product.productId})">View Details</button>
+                  </div>
+                </div>
+              `;
+                productList.appendChild(productCard);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching product data:', error);
         });
 }
 

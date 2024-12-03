@@ -162,6 +162,22 @@ th {
     opacity: 0.9;
 }
 
+.resolve-btn {
+    background-color: #28a745; /* Green color for resolve */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+.resolve-btn:hover {
+    opacity: 0.9;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .dashboard-container {

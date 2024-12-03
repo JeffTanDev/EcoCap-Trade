@@ -81,9 +81,36 @@ function purchaseQuota() {
         .then(response => {
             alert(`Successfully purchased ${quantity} units of ${productTitle}`);
             $("#productModal").modal("hide");
+            refreshProductList(); // 刷新产品列表
         })
         .catch(error => {
             alert(`Error purchasing quota: ${error.response ? error.response.data : error.message}`);
+        });
+}
+
+function refreshProductList() {
+    axios.get('/api/iee-dailyRelease')
+        .then(response => {
+            const product = response.data.data;
+            if (product && product.productName === "Indirect_Energy_Emissions") {
+                productList.innerHTML = ''; // 清空当前列表
+                const productCard = document.createElement("div");
+                productCard.classList.add("col-md-4");
+                productCard.innerHTML = `
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">${product.productName}</h5>
+                    <p class="card-text">Available Today: ${product.initialAmount}</p>
+                    <p class="card-text">Remaining: ${product.availableAmount}</p>
+                    <button class="btn btn-primary apple-button" onclick="showProductDetails(${product.productId})">View Details</button>
+                  </div>
+                </div>
+              `;
+                productList.appendChild(productCard);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching product data:', error);
         });
 }
 

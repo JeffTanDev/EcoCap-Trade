@@ -73,20 +73,45 @@ function purchaseQuota() {
     const productTitle = document.getElementById("iqProductTitle").textContent;
     const quantity = document.getElementById("iqQuantitySlider").value;
 
-    // Data to send to the backend
     const data = {
         product: productTitle,
         quantity: quantity
     };
 
-    // Send a POST request to the backend
     axios.post('/api/iq-purchase', data)
         .then(response => {
             alert(`Successfully purchased ${quantity} units of ${productTitle}`);
             $("#iqProductModal").modal("hide");
+            refreshProductList(); // 刷新产品列表
         })
         .catch(error => {
             alert(`Error purchasing quota: ${error.response ? error.response.data : error.message}`);
+        });
+}
+
+function refreshProductList() {
+    axios.get('/api/iq-dailyRelease')
+        .then(response => {
+            const product = response.data.data;
+            if (product && product.productName === "Indirect_Emission") {
+                iqProductList.innerHTML = ''; // 清空当前列表
+                const productCard = document.createElement("div");
+                productCard.classList.add("col-md-4");
+                productCard.innerHTML = `
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">${product.productName}</h5>
+                    <p class="card-text">Available Today: ${product.initialAmount}</p>
+                    <p class="card-text">Remaining: ${product.availableAmount}</p>
+                    <button class="btn btn-primary apple-button" onclick="showIQProductDetails(${product.productId})">View Details</button>
+                  </div>
+                </div>
+              `;
+                iqProductList.appendChild(productCard);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching product data:', error);
         });
 }
 
