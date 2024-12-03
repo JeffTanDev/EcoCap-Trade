@@ -18,7 +18,7 @@ built with HTML, CSS and JavaScript.
 1. **Clone the Repository**: 
    ```bash
    git clone <repository-url>
-   cd EcoCap
+   cd EcoCap-Trade
    ```
 
 2. **Set Up the Database**:
@@ -56,6 +56,3 @@ built with HTML, CSS and JavaScript.
 - MySQL is installed and configured on the local machine.
 - The application is intended for use in environments where emission quota management is relevant.
 
-## 7. Limitations
-- The application currently supports only basic user roles (admin and regular users).
-- There is no automated backup process for the MySQL database, which increases the risk of data loss.
